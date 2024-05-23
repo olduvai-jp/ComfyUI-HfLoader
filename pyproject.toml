@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-hfloader"
+description = "Nodes:Lora Loader From HF"
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/olduvai-jp/ComfyUI-HfLoader"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-HfLoader"
+Icon = ""
