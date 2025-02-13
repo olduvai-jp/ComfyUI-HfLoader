@@ -24,3 +24,14 @@ Load a model from Hugging Face model hub.
 - `strength_clip`: How strongly to modify the CLIP model. This value can be negative.
 
 <img width="223" alt="loraloaderfromhf" src="https://github.com/olduvai-jp/ComfyUI-HfLoader/assets/98304434/85e47571-1a02-43b4-9030-6ac58556a2c7">
+
+### ControlNet Loader From HF
+
+Load a model from Hugging Face model hub.
+
+- `repo_name`: The name of the repository.
+- `filename`: The name of the file.
+- `api_token`: The API token for the Hugging Face. If repo is public, this can be left empty.
+
+<img width="223" alt="loraloaderfromhf" src="https://github.com/user-attachments/assets/32fe0c0f-2f31-452c-b6be-04574ac322d1">
+
