@@ -64,6 +64,53 @@ class LoraLoaderFromHF:
         model_lora, clip_lora = comfy.sd.load_lora_for_models(model, clip, lora, strength_model, strength_clip)
         return (model_lora, clip_lora)
 
+class ControlNetLoaderFromHF:
+    def __init__(self):
+        self.loaded_control_net = None
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "repo_name": ("STRING", {"multiline": False, "default": "controlnet_repo"}),
+                "filename": ("STRING", {"multiline": False, "default": "controlnet_model.pt"}),
+                "api_token": ("STRING", {"multiline": False, "default": ""}),
+            }
+        }
+    RETURN_TYPES = ("CONTROL_NET",)
+    FUNCTION = "load_controlnet_from_hf"
+    CATEGORY = "HF_loaders"
+
+    def load_controlnet_from_hf(self, repo_name, filename, api_token):
+        # Use cached ControlNet if available
+        if self.loaded_control_net is not None:
+            if self.loaded_control_net[0] == repo_name and self.loaded_control_net[1] == filename:
+                controlnet = self.loaded_control_net[2]
+            else:
+                temp = self.loaded_control_net
+                self.loaded_control_net = None
+                del temp
+                controlnet = None
+        else:
+            controlnet = None
+
+        # If no cache exists, download from Hugging Face
+        if controlnet is None:
+            token = api_token if api_token != "" else None
+            cache_dirs = folder_paths.get_folder_paths(Folders.HF_CACHE_DIR)
+            controlnet_path = hf_hub_download(
+                repo_name, 
+                filename, 
+                token=token, 
+                cache_dir=cache_dirs[0]
+            )
+            print(f"Loaded ControlNet from {controlnet_path}")
+
+            controlnet = comfy.controlnet.load_controlnet(controlnet_path)
+            self.loaded_control_net = (repo_name, filename, controlnet)
+
+        return (controlnet,)
+
 from typing import Callable, Union
 from collections.abc import Iterable
 from pathlib import Path
