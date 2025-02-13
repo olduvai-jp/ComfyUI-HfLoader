@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-hfloader"
 description = "A simple and easy to use Hugging Face model loader."
-version = "1.0.0"
+version = "1.0.1"
 license = { file = "LICENSE" }
 dependencies = ["huggingface-hub"]
 
