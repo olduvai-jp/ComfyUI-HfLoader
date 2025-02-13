@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-hfloader"
+description = "A simple and easy to use Hugging Face model loader."
+version = "1.0.0"
+license = { file = "LICENSE" }
+dependencies = ["huggingface-hub"]
+
+[project.urls]
+Repository = "https://github.com/olduvai-jp/ComfyUI-HfLoader"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "olduvai-jp"
+DisplayName = "ComfyUI-HfLoader"
+Icon = ""
